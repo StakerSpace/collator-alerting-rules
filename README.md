@@ -9,4 +9,4 @@ Most of the rules originate from the [alerting-rules.yaml](https://raw.githubuse
 - Removed the label `{{ $labels.entity }}` as we don't know and have not configued such a label. 
 - Added `increase(substrate_proposer_block_constructed_count[1h]) < 1` to the rules to warn if you haven't constructed a block in a hour time-frame.
 
-We mainain and improve on these metrics in the future for more collator specific metrics. 
+We might maintain and improve on these metrics in the future for more collator specific metrics. 
