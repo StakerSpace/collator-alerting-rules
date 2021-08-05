@@ -171,6 +171,10 @@ groups:
       message: 'Channel on node {{ $labels.instance }} contains more than
       15000 items.'
 
+  ##############################################################################
+  # Block construction / Collating
+  ##############################################################################
+
   - alert: LowBlockConstructedCount
     expr: increase(substrate_proposer_block_constructed_count[1h]) < 1
     for: 10m
