@@ -1,4 +1,4 @@
-# collator-monitoring-rules
+# collator-alerting-rules
 Alert manager collator rules for generic substrate metrics from the prometheus stream.
 
 Most of the rules originate from the [alerting-rules.yaml](https://raw.githubusercontent.com/paritytech/substrate/master/.maintain/monitoring/alerting-rules/alerting-rules.yaml) that are in the [substrate repo](https://github.com/paritytech/substrate).
