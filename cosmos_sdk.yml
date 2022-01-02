@@ -4,7 +4,7 @@
 
   - alert: BlockProductionSlow
     annotations:
-      message: 'Best block on instance {{ $labels.instance }} increases by
+      message: 'signed blocks on instance {{ $labels.instance }} increases by
       less than 1 per minute for more than 3 minutes.'
     expr: increase(tendermint_consensus_validator_last_signed_height[1m]) < 1
     for: 3m
@@ -12,7 +12,7 @@
       severity: warning
   - alert: BlockProductionSlow
     annotations:
-      message: 'Best block on instance {{ $labels.instance }} increases by
+      message: 'signed blocks on instance {{ $labels.instance }} increases by
       less than 1 per minute for more than 10 minutes.'
     expr: increase(tendermint_consensus_validator_last_signed_height[1m]) < 1
     for: 10m
@@ -21,7 +21,7 @@
   ##############################################################################
   # Missed Blocks
   ##############################################################################
-  - alert: BlockProductionSlow
+  - alert: MissedBlocks
     annotations:
       message: 'block missed on instance {{ $labels.instance }} increases by
       less than 1 per minute for more than 3 minutes.'
@@ -29,7 +29,7 @@
     for: 3m
     labels:
       severity: warning
-  - alert: BlockProductionSlow
+  - alert: MissedBlocks
     annotations:
       message: 'block missed on instance {{ $labels.instance }} increases by
       less than 1 per minute for more than 10 minutes.'
