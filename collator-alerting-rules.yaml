@@ -124,7 +124,7 @@ groups:
   # We have set-up the label group inste
 
   - alert: NumberOfFileDescriptorsHigh
-    expr: 'node_filefd_allocated{group=~"karura|moonriver"} > 10000'
+    expr: 'node_filefd_allocated{group=~"karura|moonriver|moonbase|moonbeam"} > 10000'
     for: 3m
     labels:
       severity: warning
@@ -135,16 +135,6 @@ groups:
   ##############################################################################
   # Others
   ##############################################################################
-
-  - alert: ContinuousTaskEnded
-    expr: '(substrate_tasks_spawned_total{task_name != "basic-authorship-proposer", task_name != "substrate-rpc-subscription"} == 1)
-        - on(instance, task_name) group_left() (substrate_tasks_ended_total == 1)'
-    for: 5m
-    labels:
-      severity: warning
-    annotations:
-      message: 'Continuous task {{ $labels.task_name }} on node
-      {{ $labels.instance }} ended unexpectedly.'
 
   - alert: UnboundedChannelPersistentlyLarge
     expr: '(
