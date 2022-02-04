@@ -121,7 +121,7 @@ groups:
   ##############################################################################
 
   - alert: NumberOfFileDescriptorsHigh
-    expr: 'node_filefd_allocated{chain!=""} > 10000'
+    expr: 'node_filefd_allocated{group=~"karura|moonriver|moonbase|moonbeam"} > 10000'
     for: 3m
     labels:
       severity: warning
@@ -132,18 +132,6 @@ groups:
   ##############################################################################
   # Others
   ##############################################################################
-
-  - alert: AuthorityDiscoveryDiscoveryFailureHigh
-    expr: 'substrate_authority_discovery_handle_value_found_event_failure /
-    ignoring(name)
-    substrate_authority_discovery_dht_event_received{name="value_found"} > 0.5'
-    for: 2h
-    labels:
-      severity: warning
-    annotations:
-      message: 'Authority discovery on node {{ $labels.instance }} fails to
-      process more than 50 % of the values found on the DHT for more than 2
-      hours.'
 
   - alert: UnboundedChannelPersistentlyLarge
     expr: '(
@@ -169,3 +157,15 @@ groups:
     annotations:
       message: 'Channel {{ $labels.entity }} on node {{ $labels.instance }} contains more than
       15000 items.'
+
+  ##############################################################################
+  # Block construction / Collating
+  ##############################################################################
+
+  - alert: LowBlockConstructedCount
+    expr: increase(substrate_proposer_block_constructed_count[1h]) < 1
+    for: 15m
+    labels:
+      severity: warning
+    annotations:
+      message: 'Node {{ $labels.instance }} did not construct a block in a hour time-frame.'
